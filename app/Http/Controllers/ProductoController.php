@@ -34,7 +34,7 @@ class ProductoController extends Controller
         $productos = Producto::with(['user:id,email,name'])
                                 ->whereCodigo($request->txtBuscar) // ->where('codigo', '=', $request->txtBuscar)
                                 ->orWhere('nombre', 'like',     "%{$request->txtBuscar}%")
-                                ->paginate(10);      //get(); obtener sin pagincacion  
+                                ->get(); //->paginate(10);      //get(); obtener sin pagincacion  
 
         return \response()->json($productos, 200);
     }
@@ -51,7 +51,7 @@ class ProductoController extends Controller
     {
         //insert into productos values (...........$request)
         $input = $request->all();
-        $input['user_id'] = auth()->user()->id; //usuarios autenticados
+        $input['user_id'] = auth()->user()->id;; //auth()->user()->id; //usuarios autenticados
         $producto = Producto::create($input);
         
         return \response()->json(['res' => true, 
