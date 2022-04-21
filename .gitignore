@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+# Se comento el storage para hacer un deploy
+# de la aplicacion en heroku
 #/storage/*.key
 /vendor
 .env

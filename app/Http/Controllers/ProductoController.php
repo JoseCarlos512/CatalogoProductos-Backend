@@ -6,6 +6,7 @@ use App\Http\Requests\CreateProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Image;
 
 class ProductoController extends Controller
 {
@@ -166,7 +167,8 @@ class ProductoController extends Controller
     private function cargarImagen($file, $id) {
         // nombreArchivo = 78978779811_55.png
         $nombreArchivo = time() . "_{$id}." . $file->getClientOriginalExtension();
-        $file->move(public_path('imagenes'), $nombreArchivo);
+        $file_resize = Image::make($file->getRealPath());
+        $file_resize->resize(1280,720)->save(public_path('imagenes') ."/" . $nombreArchivo, 80);
         return $nombreArchivo;
     }
 }
